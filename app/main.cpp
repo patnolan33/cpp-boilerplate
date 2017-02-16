@@ -1,8 +1,11 @@
 #include <iostream>
-#include <lib.hpp>
+#include <pid.hpp>
+#include <memory>
 
 int main()
 {
-    dummy();
-    return 0;
+  std::shared_ptr<PID> pid = std::make_shared<PID>();
+  pid->dummy();
+
+  return 0;
 }
