@@ -4,6 +4,7 @@ add_executable(
     cpp-test
     main.cpp
     pidTest.cpp
+    ../app/pid.cpp
 )
 
 target_include_directories(cpp-test PUBLIC ../vendor/googletest/googletest/include ../include)

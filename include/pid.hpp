@@ -22,14 +22,7 @@ class PID {
    * @param Kd initial value for Kd
    * @param dt initial value for dt
    */
-  PID(double Kp, double Ki, double Kd, double dt)
-      : Kp(0),
-        Kd(0),
-        Ki(0),
-        dt(1),
-        previousError(0),
-        integral(0) {
-  }
+  PID(double Kp, double Ki, double Kd, double dt);
 
   /**
    * @brief compute takes the setpoint and actual velocity as inputs to compute the velocity
@@ -37,62 +30,45 @@ class PID {
    * @param actualVelocity Actual vehicle velocity
    * @return
    */
-  double compute(double setpoint, double actualVelocity) {
-    std::cout << "TODO: Implement compute method..." << std::endl;
-    double controlSignal = 0.0;
-
-    return controlSignal;
-  }
+  double compute(double setpoint, double actualVelocity);
 
 
   /**
    * @breif Get the value of the proportional gain
    * @return Kp gain
    */
-  double getKp() {
-    return 0;
-  }
+  double getKp();
 
   /**
    * @breif Get the value of the integral gain
    * @return Ki gain
    */
-  double getKi() {
-    return 0;
-  }
+  double getKi();
 
   /**
    * @breif Get the value of the derivative gain
    * @return Kd gain
    */
-  double getKd() {
-    return 0;
-  }
+  double getKd();
 
   /**
    * @brief Set the value of the proportional gain
    * @param kp New Kp value
    */
-  void setKp(double kp) {
-    Kp = 0;
-  }
+  void setKp(double kp);
 
   /**
    * @brief Set the value of the integral gain
    * @param ki New Ki value
    */
-  void setKi(double ki) {
-    Ki = 0;
-  }
+  void setKi(double ki);
 
   /**
    * @brief Set the value of the derivative gain
    * @param kd New Kd value
    */
-  void setKd(double kd) {
-    Kd = 0;
-  }
-  
+  void setKd(double kd);
+
 
  private:
 
