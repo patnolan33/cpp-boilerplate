@@ -16,29 +16,27 @@
  * @brief Test computation of the control input needed to correct any velocity discrepencies
  */
 TEST(PIDTest, testCompute) {
-  std::shared_ptr<PID> pid = std::make_shared < PID > (1, 1, 1, 1);
+  std::shared_ptr<PID> pid = std::make_shared < PID > (0.1, 0.01, 0.5, 1);
 
-  // TODO: When compute is actually implemented, we need to verify that the value we are testing makes sense
-  //        (i.e 1 is not likely to be a good value to test.
-  EXPECT_EQ(1, pid->compute(0, 0));
+  EXPECT_NEAR(1, pid->compute(1, 2), 0.001);
 }
 
 /**
  * @brief Test initialization of gains and the get functions
  */
 TEST(PIDTest, testGainInitialization) {
-  std::shared_ptr<PID> pid = std::make_shared < PID > (1, 1, 1, 1);
+  std::shared_ptr<PID> pid = std::make_shared < PID > (0.1, 0.01, 0.5, 1);
 
-  EXPECT_EQ(1, pid->getKp());
-  EXPECT_EQ(1, pid->getKi());
-  EXPECT_EQ(1, pid->getKd());
+  EXPECT_EQ(0.1, pid->getKp());
+  EXPECT_EQ(0.01, pid->getKi());
+  EXPECT_EQ(0.5, pid->getKd());
 }
 
 /**
  * @brief Test the set functions properly set each gain
  */
 TEST(PIDTest, testGainSetting) {
-  std::shared_ptr<PID> pid = std::make_shared < PID > (1, 1, 1, 1);
+  std::shared_ptr<PID> pid = std::make_shared < PID > (0.1, 0.01, 0.5, 1);
   pid->setKp(10);
   pid->setKi(10);
   pid->setKd(10);

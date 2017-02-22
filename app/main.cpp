@@ -13,8 +13,11 @@
 int main()
 {
 
-  std::shared_ptr<PID> pid = std::make_shared < PID > (0, 0, 0, 1);
-  pid->compute(0, 0);
+  std::shared_ptr<PID> pid = std::make_shared < PID > (0.1, 0.01, 0.5, 1);
+
+  double velocity = pid->compute(1, 2);
+
+  std::cout << "Computed velocity: " << velocity << std::endl;
 
   return 0;
 }
