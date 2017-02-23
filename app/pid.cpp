@@ -18,10 +18,10 @@
  * @param dt initial value for dt
  */
 PID::PID(double Kp, double Ki, double Kd, double dt)
-    : Kp(0),
-      Kd(0),
-      Ki(0),
-      dt(1),
+    : Kp(Kp),
+      Kd(Kd),
+      Ki(Ki),
+      dt(dt),
       previousError(0),
       integral(0) {
 }
@@ -30,13 +30,44 @@ PID::PID(double Kp, double Ki, double Kd, double dt)
  * @brief compute takes the setpoint and actual velocity as inputs to compute the velocity
  * @param setpoint Desired velocity
  * @param actualVelocity Actual vehicle velocity
- * @return
+ * @param error Difference between setpoint and actualVelocity
+ * @param newVelcity The new velocity get from PID controller
+ * @return NewVelocity
  */
 double PID::compute(double setpoint, double actualVelocity) {
-  std::cout << "TODO: Implement compute method..." << std::endl;
-  double controlSignal = 0.0;
 
-  return controlSignal;
+	double controlSignal = 0.0;
+
+	  double error=setpoint-actualVelocity;
+
+	  int count=0;
+
+	  //error*error is to avoid the affection from postive and negtive value
+
+	  while ( error*error >0.000001){
+		  integral+=previousError*dt;
+
+		  error=setpoint-actualVelocity;
+
+	  controlSignal= Kp*error + Ki* integral + Kd*(error-previousError)/dt;
+
+	  actualVelocity=actualVelocity+ controlSignal;
+
+	  previousError=error;
+
+	  count++;
+
+	  if (count>10000) {
+		  std::cout<<" Cannot Find Proper Value\n";
+		  return 1;
+	  }
+
+	  }
+
+	  double newVelocity=actualVelocity;
+
+
+	  return newVelocity;
 }
 
 /**
@@ -44,7 +75,7 @@ double PID::compute(double setpoint, double actualVelocity) {
  * @return Kp gain
  */
 double PID::getKp() {
-  return 0;
+  return Kp;
 }
 
 /**
@@ -52,7 +83,7 @@ double PID::getKp() {
  * @return Ki gain
  */
 double PID::getKi() {
-  return 0;
+  return Ki;
 }
 
 /**
@@ -60,7 +91,7 @@ double PID::getKi() {
  * @return Kd gain
  */
 double PID::getKd() {
-  return 0;
+  return Kd;
 }
 
 /**
@@ -68,7 +99,7 @@ double PID::getKd() {
  * @param kp New Kp value
  */
 void PID::setKp(double kp) {
-  Kp = 0;
+  Kp = kp;
 }
 
 /**
@@ -76,7 +107,7 @@ void PID::setKp(double kp) {
  * @param ki New Ki value
  */
 void PID::setKi(double ki) {
-  Ki = 0;
+  Ki = ki;
 }
 
 /**
@@ -84,7 +115,7 @@ void PID::setKi(double ki) {
  * @param kd New Kd value
  */
 void PID::setKd(double kd) {
-  Kd = 0;
+  Kd = kd;
 }
 
 
