@@ -38,22 +38,22 @@ double PID::compute(double setpoint, double actualVelocity) {
 
 	double controlSignal = 0.0;
 
-	  double error=setpoint-actualVelocity;
+	  double error=setpoint-actualVelocity; //compute error
 
-	  int count=0;
+	  int count=0; //count of loop in case of infinite loop
 
 	  //error*error is to avoid the affection from postive and negtive value
 
 	  while ( error*error >0.000001){
 		  integral+=previousError*dt;
 
-		  error=setpoint-actualVelocity;
+		  error=setpoint-actualVelocity; //compute error
 
-	  controlSignal= Kp*error + Ki* integral + Kd*(error-previousError)/dt;
+	  controlSignal= Kp*error + Ki* integral + Kd*(error-previousError)/dt; //output signal from PID controller
 
-	  actualVelocity=actualVelocity+ controlSignal;
+	  actualVelocity=actualVelocity+ controlSignal; //update actualVelocity
 
-	  previousError=error;
+	  previousError=error;  //update previousError
 
 	  count++;
 
@@ -64,7 +64,7 @@ double PID::compute(double setpoint, double actualVelocity) {
 
 	  }
 
-	  double newVelocity=actualVelocity;
+	  double newVelocity=actualVelocity; //get new velocity
 
 
 	  return newVelocity;
